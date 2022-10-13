@@ -17,7 +17,7 @@ public class ArrayExamples {
   static int[] reversed(int[] arr) {
     int[] newArray = new int[arr.length];
     for(int i = 0; i < arr.length; i += 1) {
-      //BUG: newArray and arr were swapped here.
+      //BUG: newArray and arr were swapped here, and it should return newArray
       newArray[i] = arr[arr.length - i -1];
     }
     return newArray;
@@ -27,12 +27,20 @@ public class ArrayExamples {
   // lowest number when calculating. Returns 0 if there are no elements or just
   // 1 element in the array
   static double averageWithoutLowest(double[] arr) {
+
     if(arr.length < 2) { return 0.0; }
+
     double lowest = arr[0];
+    double sum = 0;
+
+    //Check if all values are the same 
+    for(double num: arr) {
+      if(num < lowest || num > lowest) { break; }
+      return sum / (arr.length);
+    }
     for(double num: arr) {
       if(num < lowest) { lowest = num; }
     }
-    double sum = 0;
     for(double num: arr) {
       if(num != lowest) { sum += num; }
     }
